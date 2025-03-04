@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { 
   Card, Form, FormLayout, TextField, Button, Page, 
-  Layout, Banner, Tabs, Select, VerticalStack, Heading, TextStyle
+  Layout, Banner, Tabs, Select, BlockStack, Heading, TextStyle
 } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../supabase';
@@ -359,15 +359,15 @@ export default function ListingEditor() {
       case 5: // Récapitulatif
         return (
           <Card sectioned>
-            <VerticalStack>
+            <BlockStack>
               <TextStyle variation="strong">Récapitulatif de votre hébergement</TextStyle>
               
               <Card.Section title="Informations de base">
-                <VerticalStack spacing="tight">
+                <BlockStack gap="200">
                   <p><TextStyle variation="strong">Nom:</TextStyle> {formData.nom}</p>
                   <p><TextStyle variation="strong">Type:</TextStyle> {formData.type}</p>
                   <p><TextStyle variation="strong">Description:</TextStyle> {formData.description}</p>
-                </VerticalStack>
+                </BlockStack>
               </Card.Section>
               
               <Card.Section title="Localisation">
@@ -375,24 +375,22 @@ export default function ListingEditor() {
               </Card.Section>
               
               <Card.Section title="Équipements">
-                <VerticalStack spacing="tight">
+                <BlockStack gap="200">
                   {formData.equipements.map(equipment => (
-                    <VerticalStack.Item key={equipment}>
-                      <span className="tag">{equipment}</span>
-                    </VerticalStack.Item>
+                    <span key={equipment} className="tag">{equipment}</span>
                   ))}
-                </VerticalStack>
+                </BlockStack>
               </Card.Section>
               
               <Card.Section title="Tarification">
-                <VerticalStack spacing="tight">
+                <BlockStack gap="200">
                   <p><TextStyle variation="strong">Prix min/max:</TextStyle> {formData.tarifs.min}€ - {formData.tarifs.max}€</p>
                   <p><TextStyle variation="strong">Semaine standard:</TextStyle> {formData.tarifs.semaine_standard}€</p>
                   <p><TextStyle variation="strong">Weekend standard:</TextStyle> {formData.tarifs.weekend_standard}€</p>
                   <p><TextStyle variation="strong">Zone vacances:</TextStyle> {formData.zone_vacances}</p>
-                </VerticalStack>
+                </BlockStack>
               </Card.Section>
-            </VerticalStack>
+            </BlockStack>
           </Card>
         );
         
@@ -442,7 +440,7 @@ export default function ListingEditor() {
               {renderStepContent()}
               
               <Card.Section>
-                <VerticalStack spacing="loose">
+                <BlockStack gap="400">
                   <Button 
                     onClick={handlePrevStep}
                     disabled={currentStep === 0}
@@ -459,7 +457,7 @@ export default function ListingEditor() {
                       Suivant
                     </Button>
                   )}
-                </VerticalStack>
+                </BlockStack>
               </Card.Section>
             </Form>
           </Card>
