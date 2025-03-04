@@ -1,6 +1,6 @@
 // src/components/listings/EquipmentSelector.js
 import React from 'react';
-import { Card, ChoiceList, TextStyle, VerticalStack, Heading } from '@shopify/polaris';
+import { Card, ChoiceList, Text, BlockStack } from '@shopify/polaris';
 
 // Liste des équipements formatée
 const equipmentCategories = [
@@ -82,16 +82,16 @@ export default function EquipmentSelector({ selectedEquipments, onChange }) {
   return (
     <Card>
       <Card.Section>
-        <Heading>Équipements disponibles</Heading>
-        <TextStyle variation="subdued">
+        <Text as="h2">Équipements disponibles</Text>
+        <Text variation="subdued">
           Sélectionnez les équipements disponibles dans votre hébergement
-        </TextStyle>
+        </Text>
       </Card.Section>
 
-      <VerticalStack spacing="loose">
+      <BlockStack gap="800">
         {equipmentCategories.map((category) => (
           <Card.Section key={category.title}>
-            <Heading>{category.title}</Heading>
+            <Text as="h3">{category.title}</Text>
             <ChoiceList
               allowMultiple
               choices={category.items.map(item => ({
@@ -105,7 +105,7 @@ export default function EquipmentSelector({ selectedEquipments, onChange }) {
             />
           </Card.Section>
         ))}
-      </VerticalStack>
+      </BlockStack>
     </Card>
   );
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Form, FormLayout, TextField, Button, Page, Layout, Banner } from '@shopify/polaris';
+import { Card, FormLayout, TextField, Button, Page, Layout, Banner } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function Login() {
@@ -37,38 +37,37 @@ export default function Login() {
   }
 
   return (
-    <Page title="Connexion" narrowWidth>
+    <Page>
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-            {error && (
-              <Banner status="critical" title="Erreur">
-                {error}
-              </Banner>
-            )}
-            <Form onSubmit={handleSubmit}>
+          <Card title="Connexion" sectioned>
+            {error && <Banner status="critical">{error}</Banner>}
+            
+            <form onSubmit={handleSubmit}>
               <FormLayout>
                 <TextField
-                  value={email}
-                  onChange={setEmail}
                   label="Email"
                   type="email"
+                  value={email}
+                  onChange={setEmail}
                   autoComplete="email"
                   required
                 />
+
                 <TextField
-                  value={password}
-                  onChange={setPassword}
                   label="Mot de passe"
                   type="password"
+                  value={password}
+                  onChange={setPassword}
                   autoComplete="current-password"
                   required
                 />
-                <Button submit primary loading={loading}>
+
+                <Button primary submit loading={loading}>
                   Se connecter
                 </Button>
               </FormLayout>
-            </Form>
+            </form>
           </Card>
         </Layout.Section>
       </Layout>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Form, FormLayout, TextField, Button, Page, Layout, Banner, Select } from '@shopify/polaris';
+import { Card, FormLayout, TextField, Button, Page, Layout, Banner, Select } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
+import { supabase } from '../../supabase';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -58,7 +59,7 @@ export default function Register() {
                 {error}
               </Banner>
             )}
-            <Form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
               <FormLayout>
                 <Select
                   label="Civilité"
@@ -127,7 +128,7 @@ export default function Register() {
                   S'inscrire
                 </Button>
               </FormLayout>
-            </Form>
+            </form>
           </Card>
         </Layout.Section>
       </Layout>

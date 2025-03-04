@@ -149,7 +149,7 @@ export default function Dashboard() {
   // État vide (aucun hébergement)
   const emptyStateContent = (
     <EmptyState
-      heading="Créez votre premier hébergement"
+      title="Créez votre premier hébergement"
       action={{
         content: 'Ajouter un hébergement',
         onAction: () => navigate('/listings/new'),
