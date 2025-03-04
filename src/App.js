@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from '@shopify/polaris';
 import fr from '@shopify/polaris/locales/fr.json';
-import '@shopify/polaris/dist/styles.css';
+import '@shopify/polaris/build/esm/styles.css';
 
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './components/auth/Login';
