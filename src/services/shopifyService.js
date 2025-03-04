@@ -3,7 +3,8 @@ import SHOPIFY_CONFIG from '../config/shopify';
 // Fonction pour créer un produit (hébergement) dans Shopify
 export const createShopifyProduct = async (hebergementData) => {
   try {
-    const response = await fetch(`/api/shopify/products`, {
+    // Utiliser l'API de fonction Netlify
+    const response = await fetch(`/.netlify/functions/shopify-product-create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +31,12 @@ export const createShopifyProduct = async (hebergementData) => {
       }),
     });
 
-    return await response.json();
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || 'Erreur lors de la création du produit');
+    }
+    
+    return data;
   } catch (error) {
     console.error('Erreur lors de la création du produit Shopify:', error);
     throw error;
@@ -40,7 +46,8 @@ export const createShopifyProduct = async (hebergementData) => {
 // Fonction pour mettre à jour un produit existant
 export const updateShopifyProduct = async (productId, hebergementData) => {
   try {
-    const response = await fetch(`/api/shopify/products/${productId}`, {
+    // Utiliser l'API de fonction Netlify
+    const response = await fetch(`/.netlify/functions/shopify-product-update/${productId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +70,12 @@ export const updateShopifyProduct = async (productId, hebergementData) => {
       }),
     });
 
-    return await response.json();
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || 'Erreur lors de la mise à jour du produit');
+    }
+    
+    return data;
   } catch (error) {
     console.error('Erreur lors de la mise à jour du produit Shopify:', error);
     throw error;

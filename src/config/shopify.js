@@ -1,7 +1,7 @@
 const SHOPIFY_CONFIG = {
-  apiKey: 'c9c675cbdc5380df1393b3267326a3de',
-  apiSecretKey: 'd33eb96d5c24689470a4c50f5ca81c67',
-  shopUrl: 'dev-lovenspa.myshopify.com'
+  apiKey: process.env.REACT_APP_SHOPIFY_API_KEY,
+  apiSecretKey: process.env.REACT_APP_SHOPIFY_API_SECRET_KEY,
+  shopUrl: process.env.REACT_APP_SHOPIFY_SHOP_URL
 };
 
 export default SHOPIFY_CONFIG;
