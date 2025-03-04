@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Page, Layout, Card, Button, EmptyState, 
-  ResourceList, Avatar, TextStyle, Filters, 
-  Badge, BlockStack, Heading, Banner, Spinner
+  ResourceList, Avatar, Text, IndexFilters, 
+  Badge, BlockStack, CalloutBanner, Spinner
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -85,33 +85,56 @@ export default function Dashboard() {
       key: 'status',
       label: 'Statut',
       filter: (
-        <Filters.ResourceList
-          resourceName={{ singular: 'hébergement', plural: 'hébergements' }}
-          filterValueKey="filterValue"
-          filters={[
+        <IndexFilters
+          queryValue=""
+          queryPlaceholder="Rechercher un hébergement"
+          onQueryChange={() => {}}
+          onQueryClear={() => {}}
+          onClearAll={() => {}}
+          cancelAction={{
+            onAction: () => {},
+            disabled: false,
+            loading: false,
+          }}
+          tabs={[
             {
-              key: 'all',
-              label: 'Tous',
+              id: 'all',
+              content: 'Tous',
+              accessibilityLabel: 'Tous les hébergements',
+              isLocked: false,
+              actions: [],
             },
             {
-              key: 'draft',
-              label: 'Brouillons',
+              id: 'draft',
+              content: 'Brouillons',
+              accessibilityLabel: 'Hébergements en brouillon',
+              isLocked: false,
+              actions: [],
             },
             {
-              key: 'pending',
-              label: 'En attente',
+              id: 'pending',
+              content: 'En attente',
+              accessibilityLabel: 'Hébergements en attente',
+              isLocked: false,
+              actions: [],
             },
             {
-              key: 'published',
-              label: 'Publiés',
+              id: 'published',
+              content: 'Publiés',
+              accessibilityLabel: 'Hébergements publiés',
+              isLocked: false,
+              actions: [],
             },
             {
-              key: 'rejected',
-              label: 'Refusés',
+              id: 'rejected',
+              content: 'Refusés',
+              accessibilityLabel: 'Hébergements refusés',
+              isLocked: false,
+              actions: [],
             },
           ]}
-          onFiltersChange={(selectedFilters) => setFilterValue(selectedFilters.filterValue)}
-          appliedFilters={filterValue !== 'all' ? [{key: 'status', value: filterValue}] : []}
+          selected={filterValue}
+          onSelect={setFilterValue}
         />
       ),
       shortcut: true,
@@ -160,16 +183,16 @@ export default function Dashboard() {
           <Card>
             <Card.Section>
               <BlockStack>
-                <Heading>Vos hébergements</Heading>
-                <TextStyle variation="subdued">
+                <Text as="h2">Vos hébergements</Text>
+                <Text variation="subdued">
                   {listings.length} hébergement{listings.length !== 1 ? 's' : ''}
-                </TextStyle>
+                </Text>
               </BlockStack>
             </Card.Section>
             
             {error && (
               <Card.Section>
-                <Banner status="critical">{error}</Banner>
+                <CalloutBanner status="critical">{error}</CalloutBanner>
               </Card.Section>
             )}
             
@@ -178,7 +201,7 @@ export default function Dashboard() {
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
                   <Spinner accessibilityLabel="Chargement des hébergements" size="large" />
                   <div style={{ marginTop: '1rem' }}>
-                    <TextStyle variation="subdued">Chargement de vos hébergements...</TextStyle>
+                    <Text variation="subdued">Chargement de vos hébergements...</Text>
                   </div>
                 </div>
               ) : listings.length === 0 ? (
@@ -200,9 +223,9 @@ export default function Dashboard() {
                           <Avatar size="medium" name={nom} />
                           
                           <BlockStack gap="200">
-                            <TextStyle variation="strong">{nom}</TextStyle>
-                            <TextStyle variation="subdued">{type}</TextStyle>
-                            <TextStyle>Prix: {tarif_min}€ - {tarif_max}€</TextStyle>
+                            <Text variation="strong">{nom}</Text>
+                            <Text variation="subdued">{type}</Text>
+                            <Text>Prix: {tarif_min}€ - {tarif_max}€</Text>
                           </BlockStack>
                           
                           <Badge status={getBadgeStatus(status)}>
@@ -220,9 +243,56 @@ export default function Dashboard() {
                     );
                   }}
                   filterControl={
-                    <Filters
+                    <IndexFilters
                       queryValue=""
-                      filters={filters}
+                      queryPlaceholder="Rechercher un hébergement"
+                      onQueryChange={() => {}}
+                      onQueryClear={() => {}}
+                      onClearAll={() => {}}
+                      cancelAction={{
+                        onAction: () => {},
+                        disabled: false,
+                        loading: false,
+                      }}
+                      tabs={[
+                        {
+                          id: 'all',
+                          content: 'Tous',
+                          accessibilityLabel: 'Tous les hébergements',
+                          isLocked: false,
+                          actions: [],
+                        },
+                        {
+                          id: 'draft',
+                          content: 'Brouillons',
+                          accessibilityLabel: 'Hébergements en brouillon',
+                          isLocked: false,
+                          actions: [],
+                        },
+                        {
+                          id: 'pending',
+                          content: 'En attente',
+                          accessibilityLabel: 'Hébergements en attente',
+                          isLocked: false,
+                          actions: [],
+                        },
+                        {
+                          id: 'published',
+                          content: 'Publiés',
+                          accessibilityLabel: 'Hébergements publiés',
+                          isLocked: false,
+                          actions: [],
+                        },
+                        {
+                          id: 'rejected',
+                          content: 'Refusés',
+                          accessibilityLabel: 'Hébergements refusés',
+                          isLocked: false,
+                          actions: [],
+                        },
+                      ]}
+                      selected={filterValue}
+                      onSelect={setFilterValue}
                     />
                   }
                 />
@@ -235,32 +305,32 @@ export default function Dashboard() {
           <Card title="Statistiques" sectioned>
             <BlockStack gap="400">
               <BlockStack gap="200">
-                <TextStyle variation="strong">Total des hébergements</TextStyle>
-                <TextStyle>{listings.length}</TextStyle>
+                <Text variation="strong">Total des hébergements</Text>
+                <Text>{listings.length}</Text>
               </BlockStack>
               
               <BlockStack gap="200">
-                <TextStyle variation="strong">Publiés</TextStyle>
-                <TextStyle>{listings.filter(l => l.status === 'published').length}</TextStyle>
+                <Text variation="strong">Publiés</Text>
+                <Text>{listings.filter(l => l.status === 'published').length}</Text>
               </BlockStack>
               
               <BlockStack gap="200">
-                <TextStyle variation="strong">En attente</TextStyle>
-                <TextStyle>{listings.filter(l => l.status === 'pending').length}</TextStyle>
+                <Text variation="strong">En attente</Text>
+                <Text>{listings.filter(l => l.status === 'pending').length}</Text>
               </BlockStack>
               
               <BlockStack gap="200">
-                <TextStyle variation="strong">Brouillons</TextStyle>
-                <TextStyle>{listings.filter(l => l.status === 'draft').length}</TextStyle>
+                <Text variation="strong">Brouillons</Text>
+                <Text>{listings.filter(l => l.status === 'draft').length}</Text>
               </BlockStack>
             </BlockStack>
           </Card>
           
           <Card title="Aide" sectioned>
-            <TextStyle>
+            <Text>
               Si vous avez besoin d'aide pour créer ou gérer vos hébergements, 
               n'hésitez pas à contacter notre équipe.
-            </TextStyle>
+            </Text>
             <div style={{ marginTop: '1rem' }}>
               <Button url="mailto:support@lovenspa.fr">
                 Contacter le support

@@ -1,8 +1,8 @@
 // src/components/listings/ListingEditor.js
 import React, { useState, useCallback } from 'react';
 import { 
-  Card, Form, FormLayout, TextField, Button, Page, 
-  Layout, Banner, Tabs, Select, BlockStack, Heading, TextStyle
+  Card, FormLayout, TextField, Button, Page, 
+  Layout, CalloutBanner, Tabs, Select, BlockStack, Text
 } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../supabase';
@@ -271,7 +271,7 @@ export default function ListingEditor() {
         return (
           <Card sectioned>
             <FormLayout>
-              <Heading>Tarifs standards</Heading>
+              <Text as="h2">Tarifs standards</Text>
               <FormLayout.Group>
                 <TextField
                   label="Prix minimum (€)"
@@ -292,7 +292,7 @@ export default function ListingEditor() {
                 />
               </FormLayout.Group>
               
-              <Heading>Détail des tarifs</Heading>
+              <Text as="h2">Détail des tarifs</Text>
               <FormLayout.Group>
                 <TextField
                   label="Tarif semaine standard (lun-jeu)"
@@ -350,9 +350,9 @@ export default function ListingEditor() {
       case 4: // Photos
         return (
           <Card sectioned>
-            <TextStyle variation="subdued">
+            <Text variation="subdued">
               Cette fonctionnalité est en cours de développement. Vous pourrez bientôt ajouter des photos à votre hébergement.
-            </TextStyle>
+            </Text>
           </Card>
         );
         
@@ -360,13 +360,13 @@ export default function ListingEditor() {
         return (
           <Card sectioned>
             <BlockStack>
-              <TextStyle variation="strong">Récapitulatif de votre hébergement</TextStyle>
+              <Text variation="strong">Récapitulatif de votre hébergement</Text>
               
               <Card.Section title="Informations de base">
                 <BlockStack gap="200">
-                  <p><TextStyle variation="strong">Nom:</TextStyle> {formData.nom}</p>
-                  <p><TextStyle variation="strong">Type:</TextStyle> {formData.type}</p>
-                  <p><TextStyle variation="strong">Description:</TextStyle> {formData.description}</p>
+                  <p><Text variation="strong">Nom:</Text> {formData.nom}</p>
+                  <p><Text variation="strong">Type:</Text> {formData.type}</p>
+                  <p><Text variation="strong">Description:</Text> {formData.description}</p>
                 </BlockStack>
               </Card.Section>
               
@@ -384,10 +384,10 @@ export default function ListingEditor() {
               
               <Card.Section title="Tarification">
                 <BlockStack gap="200">
-                  <p><TextStyle variation="strong">Prix min/max:</TextStyle> {formData.tarifs.min}€ - {formData.tarifs.max}€</p>
-                  <p><TextStyle variation="strong">Semaine standard:</TextStyle> {formData.tarifs.semaine_standard}€</p>
-                  <p><TextStyle variation="strong">Weekend standard:</TextStyle> {formData.tarifs.weekend_standard}€</p>
-                  <p><TextStyle variation="strong">Zone vacances:</TextStyle> {formData.zone_vacances}</p>
+                  <p><Text variation="strong">Prix min/max:</Text> {formData.tarifs.min}€ - {formData.tarifs.max}€</p>
+                  <p><Text variation="strong">Semaine standard:</Text> {formData.tarifs.semaine_standard}€</p>
+                  <p><Text variation="strong">Weekend standard:</Text> {formData.tarifs.weekend_standard}€</p>
+                  <p><Text variation="strong">Zone vacances:</Text> {formData.zone_vacances}</p>
                 </BlockStack>
               </Card.Section>
             </BlockStack>
@@ -404,15 +404,15 @@ export default function ListingEditor() {
       <Layout>
         <Layout.Section>
           {error && (
-            <Banner status="critical" title="Erreur">
+            <CalloutBanner status="critical" title="Erreur">
               {error}
-            </Banner>
+            </CalloutBanner>
           )}
           
           {success && (
-            <Banner status="success" title="Succès">
+            <CalloutBanner status="success" title="Succès">
               L'hébergement a été créé avec succès et sera examiné par notre équipe.
-            </Banner>
+            </CalloutBanner>
           )}
           
           <Card>
@@ -429,7 +429,7 @@ export default function ListingEditor() {
               fitted
             />
             
-            <Form onSubmit={(e) => {
+            <FormLayout onSubmit={(e) => {
               e.preventDefault();
               if (currentStep === steps.length - 1) {
                 handleSubmit();
@@ -459,7 +459,7 @@ export default function ListingEditor() {
                   )}
                 </BlockStack>
               </Card.Section>
-            </Form>
+            </FormLayout>
           </Card>
         </Layout.Section>
       </Layout>
