@@ -1,6 +1,6 @@
 // src/components/listings/EquipmentSelector.js
 import React from 'react';
-import { Card, ChoiceList, TextStyle, VerticalStack, HorizontalStack, Heading } from '@shopify/polaris';
+import { Card, ChoiceList, TextStyle, VerticalStack, Stack, Heading } from '@shopify/polaris';
 
 // Liste des équipements formatée
 const equipmentCategories = [

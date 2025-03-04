@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { 
   Card, Form, FormLayout, TextField, Button, Page, 
-  Layout, Banner, Tabs, Select, VerticalStack, HorizontalStack, Heading, TextStyle, Stack
+  Layout, Banner, Tabs, Select, VerticalStack, Stack, Heading, TextStyle
 } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../supabase';

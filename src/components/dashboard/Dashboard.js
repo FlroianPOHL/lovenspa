@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Page, Layout, Card, Button, EmptyState, 
   ResourceList, Avatar, TextStyle, Filters, 
-  Badge, HorizontalStack, VerticalStack, Heading, Banner, Spinner
+  Badge, Stack, VerticalStack, Heading, Banner, Spinner
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -159,16 +159,16 @@ export default function Dashboard() {
         <Layout.Section>
           <Card>
             <Card.Section>
-              <HorizontalStack>
-                <HorizontalStack.Item fill>
+              <Stack>
+                <Stack.Item fill>
                   <Heading>Vos hébergements</Heading>
-                </HorizontalStack.Item>
-                <HorizontalStack.Item>
+                </Stack.Item>
+                <Stack.Item>
                   <TextStyle variation="subdued">
                     {listings.length} hébergement{listings.length !== 1 ? 's' : ''}
                   </TextStyle>
-                </HorizontalStack.Item>
-              </HorizontalStack>
+                </Stack.Item>
+              </Stack>
             </Card.Section>
             
             {error && (
@@ -200,12 +200,12 @@ export default function Dashboard() {
                         accessibilityLabel={`Voir les détails de ${nom}`}
                         onClick={() => navigate(`/listings/edit/${id}`)}
                       >
-                        <HorizontalStack>
-                          <HorizontalStack.Item>
+                        <Stack>
+                          <Stack.Item>
                             <Avatar size="medium" name={nom} />
-                          </HorizontalStack.Item>
+                          </Stack.Item>
                           
-                          <HorizontalStack.Item fill>
+                          <Stack.Item fill>
                             <VerticalStack spacing="tight">
                               <VerticalStack.Item>
                                 <TextStyle variation="strong">{nom}</TextStyle>
@@ -217,23 +217,23 @@ export default function Dashboard() {
                                 <TextStyle>Prix: {tarif_min}€ - {tarif_max}€</TextStyle>
                               </VerticalStack.Item>
                             </VerticalStack>
-                          </HorizontalStack.Item>
+                          </Stack.Item>
                           
-                          <HorizontalStack.Item>
+                          <Stack.Item>
                             <Badge status={getBadgeStatus(status)}>
                               {getStatusLabel(status)}
                             </Badge>
-                          </HorizontalStack.Item>
+                          </Stack.Item>
                           
-                          <HorizontalStack.Item>
+                          <Stack.Item>
                             <Button onClick={(e) => {
                               e.stopPropagation();
                               navigate(`/listings/edit/${id}`);
                             }}>
                               Modifier
                             </Button>
-                          </HorizontalStack.Item>
-                        </HorizontalStack>
+                          </Stack.Item>
+                        </Stack>
                       </ResourceList.Item>
                     );
                   }}
@@ -252,25 +252,25 @@ export default function Dashboard() {
         <Layout.Section secondary>
           <Card title="Statistiques" sectioned>
             <VerticalStack spacing="loose">
-              <HorizontalStack distribution="equalSpacing">
+              <Stack distribution="equalSpacing">
                 <TextStyle variation="strong">Total des hébergements</TextStyle>
                 <TextStyle>{listings.length}</TextStyle>
-              </HorizontalStack>
+              </Stack>
               
-              <HorizontalStack distribution="equalSpacing">
+              <Stack distribution="equalSpacing">
                 <TextStyle variation="strong">Publiés</TextStyle>
                 <TextStyle>{listings.filter(l => l.status === 'published').length}</TextStyle>
-              </HorizontalStack>
+              </Stack>
               
-              <HorizontalStack distribution="equalSpacing">
+              <Stack distribution="equalSpacing">
                 <TextStyle variation="strong">En attente</TextStyle>
                 <TextStyle>{listings.filter(l => l.status === 'pending').length}</TextStyle>
-              </HorizontalStack>
+              </Stack>
               
-              <HorizontalStack distribution="equalSpacing">
+              <Stack distribution="equalSpacing">
                 <TextStyle variation="strong">Brouillons</TextStyle>
                 <TextStyle>{listings.filter(l => l.status === 'draft').length}</TextStyle>
-              </HorizontalStack>
+              </Stack>
             </VerticalStack>
           </Card>
           
