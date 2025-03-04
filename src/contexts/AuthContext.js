@@ -13,9 +13,13 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     // Vérifier si l'utilisateur est déjà connecté
-    const session = supabase.auth.getSession();
-    setUser(session?.user ?? null);
-    setLoading(false);
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+      setLoading(false);
+    };
+    
+    checkSession();
 
     // Écouter les changements d'authentification
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
