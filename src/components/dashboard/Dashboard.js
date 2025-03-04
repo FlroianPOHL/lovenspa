@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Page, Layout, Card, Button, EmptyState, 
   ResourceList, Avatar, TextStyle, Filters, 
-  Badge, Stack, Heading, Banner, Spinner
+  Badge, HorizontalStack, VerticalStack, Heading, Banner, Spinner
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -159,16 +159,16 @@ export default function Dashboard() {
         <Layout.Section>
           <Card>
             <Card.Section>
-              <Stack>
-                <Stack.Item fill>
+              <HorizontalStack>
+                <HorizontalStack.Item fill>
                   <Heading>Vos hébergements</Heading>
-                </Stack.Item>
-                <Stack.Item>
+                </HorizontalStack.Item>
+                <HorizontalStack.Item>
                   <TextStyle variation="subdued">
                     {listings.length} hébergement{listings.length !== 1 ? 's' : ''}
                   </TextStyle>
-                </Stack.Item>
-              </Stack>
+                </HorizontalStack.Item>
+              </HorizontalStack>
             </Card.Section>
             
             {error && (
@@ -200,40 +200,40 @@ export default function Dashboard() {
                         accessibilityLabel={`Voir les détails de ${nom}`}
                         onClick={() => navigate(`/listings/edit/${id}`)}
                       >
-                        <Stack>
-                          <Stack.Item>
+                        <HorizontalStack>
+                          <HorizontalStack.Item>
                             <Avatar size="medium" name={nom} />
-                          </Stack.Item>
+                          </HorizontalStack.Item>
                           
-                          <Stack.Item fill>
-                            <Stack vertical spacing="tight">
-                              <Stack.Item>
+                          <HorizontalStack.Item fill>
+                            <VerticalStack spacing="tight">
+                              <VerticalStack.Item>
                                 <TextStyle variation="strong">{nom}</TextStyle>
-                              </Stack.Item>
-                              <Stack.Item>
+                              </VerticalStack.Item>
+                              <VerticalStack.Item>
                                 <TextStyle variation="subdued">{type}</TextStyle>
-                              </Stack.Item>
-                              <Stack.Item>
+                              </VerticalStack.Item>
+                              <VerticalStack.Item>
                                 <TextStyle>Prix: {tarif_min}€ - {tarif_max}€</TextStyle>
-                              </Stack.Item>
-                            </Stack>
-                          </Stack.Item>
+                              </VerticalStack.Item>
+                            </VerticalStack>
+                          </HorizontalStack.Item>
                           
-                          <Stack.Item>
+                          <HorizontalStack.Item>
                             <Badge status={getBadgeStatus(status)}>
                               {getStatusLabel(status)}
                             </Badge>
-                          </Stack.Item>
+                          </HorizontalStack.Item>
                           
-                          <Stack.Item>
+                          <HorizontalStack.Item>
                             <Button onClick={(e) => {
                               e.stopPropagation();
                               navigate(`/listings/edit/${id}`);
                             }}>
                               Modifier
                             </Button>
-                          </Stack.Item>
-                        </Stack>
+                          </HorizontalStack.Item>
+                        </HorizontalStack>
                       </ResourceList.Item>
                     );
                   }}
@@ -251,27 +251,27 @@ export default function Dashboard() {
         
         <Layout.Section secondary>
           <Card title="Statistiques" sectioned>
-            <Stack vertical spacing="loose">
-              <Stack distribution="equalSpacing">
+            <VerticalStack spacing="loose">
+              <HorizontalStack distribution="equalSpacing">
                 <TextStyle variation="strong">Total des hébergements</TextStyle>
                 <TextStyle>{listings.length}</TextStyle>
-              </Stack>
+              </HorizontalStack>
               
-              <Stack distribution="equalSpacing">
+              <HorizontalStack distribution="equalSpacing">
                 <TextStyle variation="strong">Publiés</TextStyle>
                 <TextStyle>{listings.filter(l => l.status === 'published').length}</TextStyle>
-              </Stack>
+              </HorizontalStack>
               
-              <Stack distribution="equalSpacing">
+              <HorizontalStack distribution="equalSpacing">
                 <TextStyle variation="strong">En attente</TextStyle>
                 <TextStyle>{listings.filter(l => l.status === 'pending').length}</TextStyle>
-              </Stack>
+              </HorizontalStack>
               
-              <Stack distribution="equalSpacing">
+              <HorizontalStack distribution="equalSpacing">
                 <TextStyle variation="strong">Brouillons</TextStyle>
                 <TextStyle>{listings.filter(l => l.status === 'draft').length}</TextStyle>
-              </Stack>
-            </Stack>
+              </HorizontalStack>
+            </VerticalStack>
           </Card>
           
           <Card title="Aide" sectioned>

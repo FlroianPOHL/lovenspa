@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { 
   Card, Form, FormLayout, TextField, Button, Page, 
-  Layout, Banner, Tabs, Select, Stack, Heading, TextStyle
+  Layout, Banner, Tabs, Select, VerticalStack, HorizontalStack, Heading, TextStyle, Stack
 } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../supabase';
@@ -359,15 +359,15 @@ export default function ListingEditor() {
       case 5: // Récapitulatif
         return (
           <Card sectioned>
-            <Stack vertical>
+            <VerticalStack>
               <TextStyle variation="strong">Récapitulatif de votre hébergement</TextStyle>
               
               <Card.Section title="Informations de base">
-                <Stack vertical spacing="tight">
+                <VerticalStack spacing="tight">
                   <p><TextStyle variation="strong">Nom:</TextStyle> {formData.nom}</p>
                   <p><TextStyle variation="strong">Type:</TextStyle> {formData.type}</p>
                   <p><TextStyle variation="strong">Description:</TextStyle> {formData.description}</p>
-                </Stack>
+                </VerticalStack>
               </Card.Section>
               
               <Card.Section title="Localisation">
@@ -385,14 +385,14 @@ export default function ListingEditor() {
               </Card.Section>
               
               <Card.Section title="Tarification">
-                <Stack vertical spacing="tight">
+                <VerticalStack spacing="tight">
                   <p><TextStyle variation="strong">Prix min/max:</TextStyle> {formData.tarifs.min}€ - {formData.tarifs.max}€</p>
                   <p><TextStyle variation="strong">Semaine standard:</TextStyle> {formData.tarifs.semaine_standard}€</p>
                   <p><TextStyle variation="strong">Weekend standard:</TextStyle> {formData.tarifs.weekend_standard}€</p>
                   <p><TextStyle variation="strong">Zone vacances:</TextStyle> {formData.zone_vacances}</p>
-                </Stack>
+                </VerticalStack>
               </Card.Section>
-            </Stack>
+            </VerticalStack>
           </Card>
         );
         

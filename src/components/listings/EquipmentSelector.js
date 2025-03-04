@@ -1,6 +1,6 @@
 // src/components/listings/EquipmentSelector.js
 import React from 'react';
-import { Card, ChoiceList, TextStyle, Stack, Heading } from '@shopify/polaris';
+import { Card, ChoiceList, TextStyle, VerticalStack, HorizontalStack, Heading } from '@shopify/polaris';
 
 // Liste des équipements formatée
 const equipmentCategories = [
@@ -88,7 +88,7 @@ export default function EquipmentSelector({ selectedEquipments, onChange }) {
         </TextStyle>
       </Card.Section>
 
-      <Stack vertical spacing="loose">
+      <VerticalStack spacing="loose">
         {equipmentCategories.map((category) => (
           <Card.Section key={category.title}>
             <Heading>{category.title}</Heading>
@@ -105,7 +105,8 @@ export default function EquipmentSelector({ selectedEquipments, onChange }) {
             />
           </Card.Section>
         ))}
-      </Stack>
+      </VerticalStack>
     </Card>
   );
+
 }
