@@ -18,11 +18,26 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filterValue, setFilterValue] = useState('all');
+  const [envError, setEnvError] = useState(false);
+  
+  // Vérification des variables d'environnement à l'initialisation
+  useEffect(() => {
+    // Vérifier que Supabase est correctement configuré
+    const checkEnvironment = () => {
+      if (!process.env.REACT_APP_SUPABASE_URL || !process.env.REACT_APP_SUPABASE_KEY) {
+        console.error('Variables d\'environnement Supabase manquantes');
+        setEnvError(true);
+        setLoading(false);
+      }
+    };
+    
+    checkEnvironment();
+  }, []);
   
   // Charger les hébergements de l'utilisateur au chargement du composant
   useEffect(() => {
     const fetchListings = async () => {
-      if (!user) return;
+      if (!user || envError) return;
       
       try {
         setLoading(true);
@@ -45,7 +60,7 @@ export default function Dashboard() {
     };
     
     fetchListings();
-  }, [user]);
+  }, [user, envError]);
   
   // Fonction pour obtenir la couleur du badge selon le statut
   const getBadgeStatus = (status) => {
@@ -161,6 +176,26 @@ export default function Dashboard() {
       </p>
     </EmptyState>
   );
+
+  // Ajouter une bannière d'erreur pour les variables d'environnement
+  if (envError) {
+    return (
+      <Page title="Erreur de configuration">
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <Card.Section>
+                <Banner status="critical">
+                  Erreur de configuration: Les variables d'environnement sont manquantes ou incorrectes. 
+                  Veuillez contacter l'administrateur du site.
+                </Banner>
+              </Card.Section>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </Page>
+    );
+  }
 
   return (
     <Page 
