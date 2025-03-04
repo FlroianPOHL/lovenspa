@@ -8,8 +8,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
-
-// Route protégée qui vérifie l'authentification
+import ListingEditor from './components/listings/ListingEditor'; // Ajoutez cette ligne
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -25,6 +24,15 @@ function App() {
               element={
                 <PrivateRoute>
                   <Dashboard />
+                </PrivateRoute>
+              } 
+            />
+            {/* Ajoutez cette route */}
+            <Route 
+              path="/listings/new" 
+              element={
+                <PrivateRoute>
+                  <ListingEditor />
                 </PrivateRoute>
               } 
             />
