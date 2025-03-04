@@ -22,39 +22,31 @@ export default function Register() {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
-      return;
-    }
-
+  const handleSubmit = async () => {
     try {
-      setError('');
-      setLoading(true);
-      const { success, error } = await register(
-        formData.email, 
-        formData.password, 
-        {
-          nom: formData.nom,
-          prenom: formData.prenom,
-          civilite: formData.civilite,
-          telephone: formData.telephone
+      // Inscription avec Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            nom: formData.nom,
+            prenom: formData.prenom,
+            civilite: formData.civilite,
+            telephone: formData.telephone,
+            role: 'proprietaire'
+          }
         }
-      );
-      
-      if (success) {
-        navigate('/dashboard');
-      } else {
-        setError(error || 'Échec de l\'inscription');
-      }
+      });
+  
+      if (authError) throw authError;
+  
+      // Rediriger vers le tableau de bord
+      navigate('/dashboard');
     } catch (error) {
-      setError('Échec de l\'inscription : ' + error.message);
-    } finally {
-      setLoading(false);
+      setError(error.message);
     }
-  }
+  };
 
   return (
     <Page title="Créer un compte" narrowWidth>
