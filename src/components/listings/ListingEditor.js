@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { 
   Card, Form, FormLayout, TextField, Button, Page, 
-  Layout, Banner, Tabs, Select, VerticalStack, Stack, Heading, TextStyle
+  Layout, Banner, Tabs, Select, VerticalStack, Heading, TextStyle
 } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../supabase';
@@ -375,13 +375,13 @@ export default function ListingEditor() {
               </Card.Section>
               
               <Card.Section title="Équipements">
-                <Stack spacing="tight" wrap>
+                <VerticalStack spacing="tight">
                   {formData.equipements.map(equipment => (
-                    <Stack.Item key={equipment}>
+                    <VerticalStack.Item key={equipment}>
                       <span className="tag">{equipment}</span>
-                    </Stack.Item>
+                    </VerticalStack.Item>
                   ))}
-                </Stack>
+                </VerticalStack>
               </Card.Section>
               
               <Card.Section title="Tarification">
@@ -442,7 +442,7 @@ export default function ListingEditor() {
               {renderStepContent()}
               
               <Card.Section>
-                <Stack distribution="equalSpacing">
+                <VerticalStack spacing="loose">
                   <Button 
                     onClick={handlePrevStep}
                     disabled={currentStep === 0}
@@ -459,7 +459,7 @@ export default function ListingEditor() {
                       Suivant
                     </Button>
                   )}
-                </Stack>
+                </VerticalStack>
               </Card.Section>
             </Form>
           </Card>
