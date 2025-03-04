@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { 
   Card, FormLayout, TextField, Button, Page, 
-  Layout, CalloutBanner, Tabs, Select, BlockStack, Text
+  Layout, Banner, Tabs, Select, BlockStack, Text
 } from '@shopify/polaris';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../supabase';
@@ -404,15 +404,15 @@ export default function ListingEditor() {
       <Layout>
         <Layout.Section>
           {error && (
-            <CalloutBanner status="critical" title="Erreur">
+            <Banner status="critical" title="Erreur">
               {error}
-            </CalloutBanner>
+            </Banner>
           )}
           
           {success && (
-            <CalloutBanner status="success" title="Succès">
+            <Banner status="success" title="Succès">
               L'hébergement a été créé avec succès et sera examiné par notre équipe.
-            </CalloutBanner>
+            </Banner>
           )}
           
           <Card>

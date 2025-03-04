@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Page, Layout, Card, Button, EmptyState, 
   ResourceList, Avatar, Text, IndexFilters, 
-  Badge, BlockStack, CalloutBanner, Spinner
+  Badge, BlockStack, Banner, Spinner
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -192,7 +192,7 @@ export default function Dashboard() {
             
             {error && (
               <Card.Section>
-                <CalloutBanner status="critical">{error}</CalloutBanner>
+                <Banner status="critical">{error}</Banner>
               </Card.Section>
             )}
             
